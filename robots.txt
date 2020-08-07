@@ -1,1 +1,1 @@
-Sitemap: https://fastpages.fast.ai/sitemap.xml
+Sitemap: https://json-kr.github.io/MLforIR4/sitemap.xml
