@@ -1,1 +1,1 @@
-Sitemap: https://json-kr.com/MLforIR4/sitemap.xml
+Sitemap: https://json-kr.github.io/MLforIR4/sitemap.xml
