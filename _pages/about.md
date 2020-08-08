@@ -3,7 +3,7 @@ layout: page
 title: About Me
 permalink: /about/
 ---
-![Profile Photo](/images/Profile_Photo.png){: width="40%"}
+![Profile Photo](/images/Profile_Photo.png){: width="40%" height="40"}
 ### Jaewon Son
 I am a thermal and fluid management engineer working in the automotive industry. Born and bred in South Korea, but currently living in Japan.
 My key skills and interests are:
