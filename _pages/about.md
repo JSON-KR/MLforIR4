@@ -3,8 +3,9 @@ layout: page
 title: About Me
 permalink: /about/
 ---
-![Profile Photo](/images/Profile_Photo.png){: width="40%" height="40"}
+![Profile Photo]({{ site.baseurl }}/images/Profile_Photo.png "A lovely day in Jeju island")
 ### Jaewon Son
+> Living in accordance with Kaizen (improvements).
 I am a thermal and fluid management engineer working in the automotive industry. Born and bred in South Korea, but currently living in Japan.
 My key skills and interests are:
 - Computational Fluid Dynamics (CFD)
