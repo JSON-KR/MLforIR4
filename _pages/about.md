@@ -23,4 +23,4 @@ Besides the above, outside of engineering, I enjoy the followings:
 - Running.
 
 
-For those who want to know more about me, please [email](bemba@naver.com) me. 
+For those who want to know more about me, please [email](mailto:bemba@naver.com) me. 
