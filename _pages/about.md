@@ -5,7 +5,7 @@ permalink: /about/
 ---
 ![Profile Photo]({{site.baseurl}}/images/Profile_Photo.png "A lovely day in Jeju island")
 ### Jaewon Son
-> Living in accordance with Kaizen (improvements).
+> Living in accordance with Kaizen (improvements)
 
 I am a thermal and fluid management engineer working in the automotive industry. Born and bred in South Korea, but currently living in Japan.
 My key skills and interests are:
@@ -21,3 +21,6 @@ Besides the above, outside of engineering, I enjoy the followings:
 - Brazilian Jiu-Jitsu 
 - Travel 
 - Running.
+
+
+For those who want to know more about me, please [email](bemba@naver.com) me. 
