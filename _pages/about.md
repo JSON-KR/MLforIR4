@@ -3,9 +3,9 @@ layout: page
 title: About Me
 permalink: /about/
 ---
-![Profile Photo](/images/Profile_Photo.jpg)
+![Profile Photo](/images/Profile_Photo.png = 250x)
 ### Jaewon Son
-I am a thermal and fluid management engineer working in the automotive industry.
+I am a thermal and fluid management engineer working in the automotive industry. Born and bred in South Korea, but currently living in Japan.
 My key skills and interests are:
 - Computational Fluid Dynamics (CFD)
 - Turbulent flow 
