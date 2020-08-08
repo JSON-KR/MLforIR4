@@ -3,11 +3,19 @@ layout: page
 title: About Me
 permalink: /about/
 ---
+![Profile Photo](/images/Profile_Photo.jpg)
+### Jaewon Son
+I am a thermal and fluid management engineer working in the automotive industry.
+My key skills and interests are:
+- Computational Fluid Dynamics (CFD)
+- Turbulent flow 
+- Battery thermal management
+- Mechanical design
+- Applying Machine Learning in manufacturing and product development.
 
-This is where you put the contents of your *About* page. Like all your pages, it's in [Markdown](https://guides.github.com/features/mastering-markdown/) format.
+Although machine learning is not my expertise **yet**, I have been consistently building up relevant skill-sets, aspiring to bring innovations in the manufacturing industry. 
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
-
-
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+Besides the above mentioned, I enjoy the followings:
+- Brazilian Jiu-Jitsu 
+- Travel 
+- Running.
