@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Assignment 3 - More Pandas | J.SON - Machine Learning Study Blog</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Assignment 3 - More Pandas" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies." />
+<meta property="og:description" content="A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies." />
+<link rel="canonical" href="https://json-kr.github.io/MLforIR4/2020/08/09/Advanced-Python-Pandas.html" />
+<meta property="og:url" content="https://json-kr.github.io/MLforIR4/2020/08/09/Advanced-Python-Pandas.html" />
+<meta property="og:site_name" content="J.SON - Machine Learning Study Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-09T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2020-08-09T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://json-kr.github.io/MLforIR4/2020/08/09/Advanced-Python-Pandas.html"},"description":"A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies.","@type":"BlogPosting","url":"https://json-kr.github.io/MLforIR4/2020/08/09/Advanced-Python-Pandas.html","headline":"Assignment 3 - More Pandas","dateModified":"2020-08-09T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/MLforIR4/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://json-kr.github.io/MLforIR4/feed.xml" title="J.SON - Machine Learning Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/MLforIR4/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Assignment 3 - More Pandas | J.SON - Machine Learning Study Blog</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Assignment 3 - More Pandas" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies." />
+<meta property="og:description" content="A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies." />
+<link rel="canonical" href="https://json-kr.github.io/MLforIR4/2020/08/09/Advanced-Python-Pandas.html" />
+<meta property="og:url" content="https://json-kr.github.io/MLforIR4/2020/08/09/Advanced-Python-Pandas.html" />
+<meta property="og:site_name" content="J.SON - Machine Learning Study Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-09T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2020-08-09T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://json-kr.github.io/MLforIR4/2020/08/09/Advanced-Python-Pandas.html"},"description":"A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies.","@type":"BlogPosting","url":"https://json-kr.github.io/MLforIR4/2020/08/09/Advanced-Python-Pandas.html","headline":"Assignment 3 - More Pandas","dateModified":"2020-08-09T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://json-kr.github.io/MLforIR4/feed.xml" title="J.SON - Machine Learning Study Blog" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/MLforIR4/">J.SON - Machine Learning Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/MLforIR4/about/">About Me</a><a class="page-link" href="/MLforIR4/search/">Search</a><a class="page-link" href="/MLforIR4/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Assignment 3 - More Pandas</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-09T00:00:00-05:00" itemprop="datePublished">
+        Aug 9, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      12 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/JSON-KR/MLforIR4/tree/master/_notebooks/Advanced Python Pandas.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/MLforIR4/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/JSON-KR/MLforIR4/master?filepath=_notebooks%2FAdvanced+Python+Pandas.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/MLforIR4/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/JSON-KR/MLforIR4/blob/master/_notebooks/Advanced Python Pandas.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/MLforIR4/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/Advanced Python Pandas.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-1-(20%)">Question 1 (20%)<a class="anchor-link" href="#Question-1-(20%)"> </a></h3><p>Load the energy data from the file <code>Energy Indicators.xls</code>, which is a list of indicators of <a href="Energy%20Indicators.xls">energy supply and renewable electricity production</a> from the <a href="http://unstats.un.org/unsd/environment/excel_file_tables/2013/Energy%20Indicators.xls">United Nations</a> for the year 2013, and should be put into a DataFrame with the variable name of <strong>energy</strong>.</p>
+<p>Keep in mind that this is an Excel file, and not a comma separated values file. Also, make sure to exclude the footer and header information from the datafile. The first two columns are unneccessary, so you should get rid of them, and you should change the column labels so that the columns are:</p>
+<p><code>['Country', 'Energy Supply', 'Energy Supply per Capita', '% Renewable']</code></p>
+<p>Convert <code>Energy Supply</code> to gigajoules (there are 1,000,000 gigajoules in a petajoule). For all countries which have missing data (e.g. data with "...") make sure this is reflected as <code>np.NaN</code> values.</p>
+<p>Rename the following list of countries (for use in later questions):</p>
+<p><code>"Republic of Korea": "South Korea",
+"United States of America": "United States",
+"United Kingdom of Great Britain and Northern Ireland": "United Kingdom",
+"China, Hong Kong Special Administrative Region": "Hong Kong"</code></p>
+<p>There are also several countries with numbers and/or parenthesis in their name. Be sure to remove these,</p>
+<p>e.g.</p>
+<p><code>'Bolivia (Plurinational State of)'</code> should be <code>'Bolivia'</code>,</p>
+<p><code>'Switzerland17'</code> should be <code>'Switzerland'</code>.</p>
+<p><br /></p>
+<p>Next, load the GDP data from the file <code>world_bank.csv</code>, which is a csv containing countries' GDP from 1960 to 2015 from <a href="http://data.worldbank.org/indicator/NY.GDP.MKTP.CD">World Bank</a>. Call this DataFrame <strong>GDP</strong>.</p>
+<p>Make sure to skip the header, and rename the following list of countries:</p>
+<p><code>"Korea, Rep.": "South Korea", 
+"Iran, Islamic Rep.": "Iran",
+"Hong Kong SAR, China": "Hong Kong"</code></p>
+<p><br /></p>
+<p>Finally, load the <a href="http://www.scimagojr.com/countryrank.php?category=2102">Sciamgo Journal and Country Rank data for Energy Engineering and Power Technology</a> from the file <code>scimagojr-3.xlsx</code>, which ranks countries based on their journal contributions in the aforementioned area. Call this DataFrame <strong>ScimEn</strong>.</p>
+<p>Join the three datasets: GDP, Energy, and ScimEn into a new dataset (using the intersection of country names). Use only the last 10 years (2006-2015) of GDP data and only the top 15 countries by Scimagojr 'Rank' (Rank 1 through 15).</p>
+<p>The index of this DataFrame should be the name of the country, and the columns should be ['Rank', 'Documents', 'Citable documents', 'Citations', 'Self-citations',
+       'Citations per document', 'H index', 'Energy Supply',
+       'Energy Supply per Capita', '% Renewable', '2006', '2007', '2008',
+       '2009', '2010', '2011', '2012', '2013', '2014', '2015'].</p>
+<p><em>This function should return a DataFrame with 20 columns and 15 entries.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="n">FilePath</span> <span class="o">=</span> <span class="s1">&#39;./Data/&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">energy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">FilePath</span> <span class="o">+</span> <span class="s1">&#39;Energy_Indicators.xls&#39;</span><span class="p">)</span>
+<span class="n">energy</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Unnamed: 1</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>Unnamed: 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Environmental Indicators: Energy</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Energy Supply and Renewable Electricity Produc...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Last update: December 2015</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Choose a country from the following drop-down ...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Andorra</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Country</td>
+      <td>Energy Supply</td>
+      <td>Energy Supply per capita</td>
+      <td>Renewable Electricity Production</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Petajoules</td>
+      <td>Gigajoules</td>
+      <td>%</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Andorra</td>
+      <td>9</td>
+      <td>121</td>
+      <td>88.6957</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>website: http://unstats.un.org/unsd/ENVIRONMEN...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Energy Supply</td>
+      <td>Energy Supply per capita</td>
+      <td>Renewable Electricity Production</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Petajoules</td>
+      <td>Gigajoules</td>
+      <td>%</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>NaN</td>
+      <td>Afghanistan</td>
+      <td>Afghanistan</td>
+      <td>321</td>
+      <td>10</td>
+      <td>78.6693</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>NaN</td>
+      <td>Albania</td>
+      <td>Albania</td>
+      <td>102</td>
+      <td>35</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>NaN</td>
+      <td>Algeria</td>
+      <td>Algeria</td>
+      <td>1959</td>
+      <td>51</td>
+      <td>0.55101</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="k">def</span> <span class="nf">answer_one</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">country_name_change</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">colname</span><span class="p">,</span> <span class="n">list_before</span><span class="p">,</span> <span class="n">list_after</span><span class="p">):</span>
+        <span class="n">name_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">list_before</span><span class="p">,</span> <span class="n">list_after</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">country_before</span><span class="p">,</span> <span class="n">country_after</span> <span class="ow">in</span> <span class="n">name_list</span><span class="p">:</span>
+            <span class="n">get_id</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">colname</span><span class="p">]</span><span class="o">==</span><span class="n">country_before</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">get_id</span><span class="p">,</span> <span class="n">colname</span><span class="p">]</span> <span class="o">=</span> <span class="n">country_after</span>
+        <span class="k">return</span> <span class="n">df</span>
+    
+    <span class="n">list_country_before</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Republic of Korea&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;United States of America&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;United Kingdom of Great Britain and Northern Ireland&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;China, Hong Kong Special Administrative Region&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;Iran &quot;</span><span class="p">]</span>
+    <span class="n">list_country_after</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;South Korea&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;United States&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;United Kingdom&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;Hong Kong&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;Iran&quot;</span><span class="p">]</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./Data/Energy_Indicators.xls&#39;</span><span class="p">)</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">243</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">energy</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Environmental Indicators: Energy&#39;</span><span class="p">:</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span><span class="s1">&#39;Unnamed: 3&#39;</span><span class="p">:</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">,</span> <span class="s1">&#39;Unnamed: 4&#39;</span><span class="p">:</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">,</span> <span class="s1">&#39;Unnamed: 5&#39;</span><span class="p">:</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">energy</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">energy</span><span class="p">[</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+
+    <span class="n">name_before</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">name_after</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">energy</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">country</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
+                <span class="n">name_before</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
+                <span class="n">name_after</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">letter</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">name_before</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
+                <span class="n">name_after</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">letter</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">break</span>
+
+    <span class="n">country_name_change</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="n">name_before</span><span class="p">,</span> <span class="n">name_after</span><span class="p">)</span>
+    <span class="n">country_name_change</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="n">list_country_before</span><span class="p">,</span> <span class="n">list_country_after</span><span class="p">)</span>
+
+    <span class="n">GDP</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;world_bank.csv&#39;</span><span class="p">,</span>
+                  <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                  <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
+    <span class="n">list_country_before2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Korea, Rep.&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;Iran, Islamic Rep.&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;Hong Kong SAR, China&quot;</span><span class="p">]</span>
+    <span class="n">list_country_after2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;South Korea&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;Iran&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;Hong Kong&quot;</span><span class="p">]</span>
+    <span class="n">country_name_change</span><span class="p">(</span><span class="n">GDP</span><span class="p">,</span> <span class="s1">&#39;Country Name&#39;</span><span class="p">,</span> <span class="n">list_country_before2</span><span class="p">,</span> <span class="n">list_country_after2</span><span class="p">)</span>
+
+
+    <span class="n">ScimEn</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;scimagojr-3.xlsx&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
+
+    <span class="n">years</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span><span class="mi">2016</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+                             <span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">years</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Country Name&#39;</span><span class="p">)</span>
+    <span class="n">GDP</span> <span class="o">=</span> <span class="n">GDP</span><span class="p">[</span><span class="n">years</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;Country Name&#39;</span><span class="p">])</span>
+
+    <span class="n">ScimEn</span> <span class="o">=</span> <span class="p">(</span><span class="n">ScimEn</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ScimEn</span><span class="p">[</span><span class="s1">&#39;Rank&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+                <span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">]))</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
+
+    <span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ScimEn</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span>
+                            <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df_merged</span> <span class="o">=</span> <span class="n">df_merged</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">GDP</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span>
+                     <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_merged</span>
+<span class="n">answer_one</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>                                  Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">~\Miniconda3\lib\site-packages\pandas\core\indexes\base.py</span> in <span class="ansi-cyan-fg">get_loc</span><span class="ansi-blue-intense-fg ansi-bold">(self, key, method, tolerance)</span>
+<span class="ansi-green-fg">   2645</span>             <span class="ansi-green-intense-fg ansi-bold">try</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 2646</span><span class="ansi-yellow-intense-fg ansi-bold">                 </span><span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_engine<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_loc<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2647</span>             <span class="ansi-green-intense-fg ansi-bold">except</span> KeyError<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\index.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\index.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>: &#39;Country&#39;
+
+During handling of the above exception, another exception occurred:
+
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>                                  Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-7-905948226b97&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">     71</span> 
+<span class="ansi-green-fg">     72</span>     <span class="ansi-green-intense-fg ansi-bold">return</span> df_merged
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 73</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>answer_one<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-7-905948226b97&gt;</span> in <span class="ansi-cyan-fg">answer_one</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+<span class="ansi-green-fg">     27</span>     name_before <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-yellow-intense-fg ansi-bold">]</span>
+<span class="ansi-green-fg">     28</span>     name_after <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-yellow-intense-fg ansi-bold">]</span>
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 29</span><span class="ansi-yellow-intense-fg ansi-bold">     </span><span class="ansi-green-intense-fg ansi-bold">for</span> country <span class="ansi-green-intense-fg ansi-bold">in</span> energy<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-blue-intense-fg ansi-bold">&#39;Country&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>values<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">     30</span>         <span class="ansi-green-intense-fg ansi-bold">for</span> letter <span class="ansi-green-intense-fg ansi-bold">in</span> country<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">     31</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> letter <span class="ansi-yellow-intense-fg ansi-bold">==</span> <span class="ansi-blue-intense-fg ansi-bold">&#39;(&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\Miniconda3\lib\site-packages\pandas\core\frame.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-intense-fg ansi-bold">(self, key)</span>
+<span class="ansi-green-fg">   2798</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>columns<span class="ansi-yellow-intense-fg ansi-bold">.</span>nlevels <span class="ansi-yellow-intense-fg ansi-bold">&gt;</span> <span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">   2799</span>                 <span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_getitem_multilevel<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 2800</span><span class="ansi-yellow-intense-fg ansi-bold">             </span>indexer <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>columns<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_loc<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2801</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> is_integer<span class="ansi-yellow-intense-fg ansi-bold">(</span>indexer<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">   2802</span>                 indexer <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span>indexer<span class="ansi-yellow-intense-fg ansi-bold">]</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\Miniconda3\lib\site-packages\pandas\core\indexes\base.py</span> in <span class="ansi-cyan-fg">get_loc</span><span class="ansi-blue-intense-fg ansi-bold">(self, key, method, tolerance)</span>
+<span class="ansi-green-fg">   2646</span>                 <span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_engine<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_loc<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2647</span>             <span class="ansi-green-intense-fg ansi-bold">except</span> KeyError<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 2648</span><span class="ansi-yellow-intense-fg ansi-bold">                 </span><span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_engine<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_loc<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_maybe_cast_indexer<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2649</span>         indexer <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_indexer<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">[</span>key<span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> method<span class="ansi-yellow-intense-fg ansi-bold">=</span>method<span class="ansi-yellow-intense-fg ansi-bold">,</span> tolerance<span class="ansi-yellow-intense-fg ansi-bold">=</span>tolerance<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2650</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> indexer<span class="ansi-yellow-intense-fg ansi-bold">.</span>ndim <span class="ansi-yellow-intense-fg ansi-bold">&gt;</span> <span class="ansi-cyan-intense-fg ansi-bold">1</span> <span class="ansi-green-intense-fg ansi-bold">or</span> indexer<span class="ansi-yellow-intense-fg ansi-bold">.</span>size <span class="ansi-yellow-intense-fg ansi-bold">&gt;</span> <span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\index.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\index.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>: &#39;Country&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-2-(6.6%)">Question 2 (6.6%)<a class="anchor-link" href="#Question-2-(6.6%)"> </a></h3><p>The previous question joined three datasets then reduced this to just the top 15 entries. When you joined the datasets, but before you reduced this to the top 15 items, how many entries did you lose?</p>
+<p><em>This function should return a single number.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_two</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">country_name_change</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">colname</span><span class="p">,</span> <span class="n">list_before</span><span class="p">,</span> <span class="n">list_after</span><span class="p">):</span>
+        <span class="n">name_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">list_before</span><span class="p">,</span> <span class="n">list_after</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">country_before</span><span class="p">,</span> <span class="n">country_after</span> <span class="ow">in</span> <span class="n">name_list</span><span class="p">:</span>
+            <span class="n">get_id</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">colname</span><span class="p">]</span><span class="o">==</span><span class="n">country_before</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">get_id</span><span class="p">,</span> <span class="n">colname</span><span class="p">]</span> <span class="o">=</span> <span class="n">country_after</span>
+        <span class="k">return</span> <span class="n">df</span>
+    
+    <span class="n">list_country_before</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Republic of Korea&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;United States of America&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;United Kingdom of Great Britain and Northern Ireland&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;China, Hong Kong Special Administrative Region&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;Iran &quot;</span><span class="p">]</span>
+    <span class="n">list_country_after</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;South Korea&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;United States&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;United Kingdom&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;Hong Kong&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;Iran&quot;</span><span class="p">]</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;./Data/Energy_Indicators.xls&#39;</span><span class="p">)</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">243</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">energy</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Environmental Indicators: Energy&#39;</span><span class="p">:</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span><span class="s1">&#39;Unnamed: 3&#39;</span><span class="p">:</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">,</span> <span class="s1">&#39;Unnamed: 4&#39;</span><span class="p">:</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">,</span> <span class="s1">&#39;Unnamed: 5&#39;</span><span class="p">:</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">energy</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">energy</span><span class="p">[</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+
+    <span class="n">name_before</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">name_after</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">energy</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">country</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
+                <span class="n">name_before</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
+                <span class="n">name_after</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">letter</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">name_before</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
+                <span class="n">name_after</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">letter</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">break</span>
+
+    <span class="n">country_name_change</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="n">name_before</span><span class="p">,</span> <span class="n">name_after</span><span class="p">)</span>
+    <span class="n">country_name_change</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="n">list_country_before</span><span class="p">,</span> <span class="n">list_country_after</span><span class="p">)</span>
+
+    <span class="n">GDP</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;world_bank.csv&#39;</span><span class="p">,</span>
+                  <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                  <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
+    <span class="n">list_country_before2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Korea, Rep.&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;Iran, Islamic Rep.&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;Hong Kong SAR, China&quot;</span><span class="p">]</span>
+    <span class="n">list_country_after2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;South Korea&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;Iran&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;Hong Kong&quot;</span><span class="p">]</span>
+    <span class="n">country_name_change</span><span class="p">(</span><span class="n">GDP</span><span class="p">,</span> <span class="s1">&#39;Country Name&#39;</span><span class="p">,</span> <span class="n">list_country_before2</span><span class="p">,</span> <span class="n">list_country_after2</span><span class="p">)</span>
+
+
+    <span class="n">ScimEn</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;scimagojr-3.xlsx&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
+
+    <span class="n">years</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span><span class="mi">2016</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+                             <span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">years</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
+
+    <span class="n">GDP</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Country Name&#39;</span><span class="p">:</span><span class="s1">&#39;Country&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">GDP</span> <span class="o">=</span> <span class="n">GDP</span><span class="p">[</span><span class="n">years</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">])</span>
+
+
+    <span class="n">ScimEn</span> <span class="o">=</span> <span class="p">(</span><span class="n">ScimEn</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+                <span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">]))</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
+    
+
+    <span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ScimEn</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span>
+                            <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df_merged</span> <span class="o">=</span> <span class="n">df_merged</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">GDP</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span>
+                     <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">df_merged2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ScimEn</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">,</span>
+                            <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df_merged2</span> <span class="o">=</span> <span class="n">df_merged2</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">GDP</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">,</span>
+                     <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">df_merged2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">15</span>
+    <span class="k">return</span> <span class="n">num</span>
+<span class="n">answer_two</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>                                  Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">~\Miniconda3\lib\site-packages\pandas\core\indexes\base.py</span> in <span class="ansi-cyan-fg">get_loc</span><span class="ansi-blue-intense-fg ansi-bold">(self, key, method, tolerance)</span>
+<span class="ansi-green-fg">   2645</span>             <span class="ansi-green-intense-fg ansi-bold">try</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 2646</span><span class="ansi-yellow-intense-fg ansi-bold">                 </span><span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_engine<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_loc<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2647</span>             <span class="ansi-green-intense-fg ansi-bold">except</span> KeyError<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\index.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\index.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>: &#39;Country&#39;
+
+During handling of the above exception, another exception occurred:
+
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>                                  Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-6-bde985832295&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">     77</span>     num <span class="ansi-yellow-intense-fg ansi-bold">=</span> df_merged2<span class="ansi-yellow-intense-fg ansi-bold">.</span>shape<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span> <span class="ansi-yellow-intense-fg ansi-bold">-</span> <span class="ansi-cyan-intense-fg ansi-bold">15</span>
+<span class="ansi-green-fg">     78</span>     <span class="ansi-green-intense-fg ansi-bold">return</span> num
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 79</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>answer_two<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-6-bde985832295&gt;</span> in <span class="ansi-cyan-fg">answer_two</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+<span class="ansi-green-fg">     25</span>     name_before <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-yellow-intense-fg ansi-bold">]</span>
+<span class="ansi-green-fg">     26</span>     name_after <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-yellow-intense-fg ansi-bold">]</span>
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 27</span><span class="ansi-yellow-intense-fg ansi-bold">     </span><span class="ansi-green-intense-fg ansi-bold">for</span> country <span class="ansi-green-intense-fg ansi-bold">in</span> energy<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-blue-intense-fg ansi-bold">&#39;Country&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>values<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">     28</span>         <span class="ansi-green-intense-fg ansi-bold">for</span> letter <span class="ansi-green-intense-fg ansi-bold">in</span> country<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">     29</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> letter <span class="ansi-yellow-intense-fg ansi-bold">==</span> <span class="ansi-blue-intense-fg ansi-bold">&#39;(&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\Miniconda3\lib\site-packages\pandas\core\frame.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-intense-fg ansi-bold">(self, key)</span>
+<span class="ansi-green-fg">   2798</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>columns<span class="ansi-yellow-intense-fg ansi-bold">.</span>nlevels <span class="ansi-yellow-intense-fg ansi-bold">&gt;</span> <span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">   2799</span>                 <span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_getitem_multilevel<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 2800</span><span class="ansi-yellow-intense-fg ansi-bold">             </span>indexer <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>columns<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_loc<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2801</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> is_integer<span class="ansi-yellow-intense-fg ansi-bold">(</span>indexer<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">   2802</span>                 indexer <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span>indexer<span class="ansi-yellow-intense-fg ansi-bold">]</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\Miniconda3\lib\site-packages\pandas\core\indexes\base.py</span> in <span class="ansi-cyan-fg">get_loc</span><span class="ansi-blue-intense-fg ansi-bold">(self, key, method, tolerance)</span>
+<span class="ansi-green-fg">   2646</span>                 <span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_engine<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_loc<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2647</span>             <span class="ansi-green-intense-fg ansi-bold">except</span> KeyError<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 2648</span><span class="ansi-yellow-intense-fg ansi-bold">                 </span><span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_engine<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_loc<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_maybe_cast_indexer<span class="ansi-yellow-intense-fg ansi-bold">(</span>key<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2649</span>         indexer <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_indexer<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">[</span>key<span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> method<span class="ansi-yellow-intense-fg ansi-bold">=</span>method<span class="ansi-yellow-intense-fg ansi-bold">,</span> tolerance<span class="ansi-yellow-intense-fg ansi-bold">=</span>tolerance<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2650</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> indexer<span class="ansi-yellow-intense-fg ansi-bold">.</span>ndim <span class="ansi-yellow-intense-fg ansi-bold">&gt;</span> <span class="ansi-cyan-intense-fg ansi-bold">1</span> <span class="ansi-green-intense-fg ansi-bold">or</span> indexer<span class="ansi-yellow-intense-fg ansi-bold">.</span>size <span class="ansi-yellow-intense-fg ansi-bold">&gt;</span> <span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\index.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\index.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.index.IndexEngine.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-green-intense-fg ansi-bold">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ansi-cyan-fg">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>: &#39;Country&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Answer-the-following-questions-in-the-context-of-only-the-top-15-countries-by-Scimagojr-Rank-(aka-the-DataFrame-returned-by-answer_one())">Answer the following questions in the context of only the top 15 countries by Scimagojr Rank (aka the DataFrame returned by <code>answer_one()</code>)<a class="anchor-link" href="#Answer-the-following-questions-in-the-context-of-only-the-top-15-countries-by-Scimagojr-Rank-(aka-the-DataFrame-returned-by-answer_one())"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-3-(6.6%)">Question 3 (6.6%)<a class="anchor-link" href="#Question-3-(6.6%)"> </a></h3><p>What is the average GDP over the last 10 years for each country? (exclude missing values from this calculation.)</p>
+<p><em>This function should return a Series named <code>avgGDP</code> with 15 countries and their average GDP sorted in descending order.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_three</span><span class="p">():</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span><span class="mi">2016</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">avgGDP</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="n">years</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">avgGDP</span>
+
+<span class="n">answer_three</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-4-(6.6%)">Question 4 (6.6%)<a class="anchor-link" href="#Question-4-(6.6%)"> </a></h3><p>By how much had the GDP changed over the 10 year span for the country with the 6th largest average GDP?</p>
+<p><em>This function should return a single number.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_four</span><span class="p">():</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span><span class="mi">2016</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()[</span><span class="n">years</span><span class="p">]</span>
+    <span class="n">avgGDP</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="n">years</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">sixth_country</span> <span class="o">=</span> <span class="n">avgGDP</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Top15</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sixth_country</span><span class="p">])</span>
+
+    <span class="n">GDP_CHANGE</span> <span class="o">=</span> <span class="n">Top15</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sixth_country</span><span class="p">][</span><span class="n">years</span><span class="p">][</span><span class="mi">9</span><span class="p">]</span><span class="o">-</span><span class="n">Top15</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sixth_country</span><span class="p">][</span><span class="n">years</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">GDP_CHANGE</span>
+<span class="n">answer_four</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-5-(6.6%)">Question 5 (6.6%)<a class="anchor-link" href="#Question-5-(6.6%)"> </a></h3><p>What is the mean <code>Energy Supply per Capita</code>?</p>
+<p><em>This function should return a single number.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_five</span><span class="p">():</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span>
+    
+    <span class="n">ESmean</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ESmean</span>
+<span class="n">answer_five</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-6-(6.6%)">Question 6 (6.6%)<a class="anchor-link" href="#Question-6-(6.6%)"> </a></h3><p>What country has the maximum % Renewable and what is the percentage?</p>
+<p><em>This function should return a tuple with the name of the country and the percentage.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_six</span><span class="p">():</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span>
+    <span class="n">ans6_country</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+    <span class="n">ans6_percentage</span> <span class="o">=</span> <span class="n">Top15</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ans6_country</span><span class="p">][</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span>
+    <span class="n">ans6</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans6_country</span><span class="p">,</span> <span class="n">ans6_percentage</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans6</span>
+<span class="n">answer_six</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-7-(6.6%)">Question 7 (6.6%)<a class="anchor-link" href="#Question-7-(6.6%)"> </a></h3><p>Create a new column that is the ratio of Self-Citations to Total Citations. 
+What is the maximum value for this new column, and what country has the highest ratio?</p>
+<p><em>This function should return a tuple with the name of the country and the ratio.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_seven</span><span class="p">():</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span>
+    <span class="n">new_column</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Self-citations&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Citations&#39;</span><span class="p">]</span>
+    <span class="n">ans7_country</span> <span class="o">=</span> <span class="n">new_column</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+    <span class="n">ans7_ratio</span> <span class="o">=</span> <span class="n">new_column</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">ans7</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans7_country</span><span class="p">,</span> <span class="n">ans7_ratio</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans7</span>
+<span class="n">answer_seven</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-8-(6.6%)">Question 8 (6.6%)<a class="anchor-link" href="#Question-8-(6.6%)"> </a></h3><p>Create a column that estimates the population using Energy Supply and Energy Supply per capita. 
+What is the third most populous country according to this estimate?</p>
+<p><em>This function should return a single string value.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_eight</span><span class="p">():</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">new_column</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">]</span>
+    <span class="n">ans8</span> <span class="o">=</span> <span class="n">new_column</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ans8</span>
+<span class="n">answer_eight</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-9-(6.6%)">Question 9 (6.6%)<a class="anchor-link" href="#Question-9-(6.6%)"> </a></h3><p>Create a column that estimates the number of citable documents per person. 
+What is the correlation between the number of citable documents per capita and the energy supply per capita? Use the <code>.corr()</code> method, (Pearson's correlation).</p>
+<p><em>This function should return a single number.</em></p>
+<p><em>(Optional: Use the built-in function <code>plot9()</code> to visualize the relationship between Energy Supply per Capita vs. Citable docs per Capita)</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_nine</span><span class="p">():</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">new_column</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Citable documents&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">]</span>
+    <span class="n">ans9</span> <span class="o">=</span> <span class="n">new_column</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">ans9</span>
+<span class="n">answer_nine</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot9</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="o">%</span><span class="k">matplotlib</span> inline
+    
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span>
+    <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;PopEst&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">]</span>
+    <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Citable docs per Capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Citable documents&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;PopEst&#39;</span><span class="p">]</span>
+    <span class="n">Top15</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Citable docs per Capita&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0006</span><span class="p">])</span>
+
+<span class="c1">#plot9()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#plot9() # Be sure to comment out plot9() before submitting the assignment!</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-10-(6.6%)">Question 10 (6.6%)<a class="anchor-link" href="#Question-10-(6.6%)"> </a></h3><p>Create a new column with a 1 if the country's % Renewable value is at or above the median for all countries in the top 15, and a 0 if the country's % Renewable value is below the median.</p>
+<p><em>This function should return a series named <code>HighRenew</code> whose index is the country name sorted in ascending order of rank.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_ten</span><span class="p">():</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Rank&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">mean_percentage</span> <span class="o">=</span><span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">HighRenew</span><span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span>
+    <span class="n">Top15</span><span class="p">[</span><span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">mean_percentage</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Top15</span><span class="p">[</span><span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">mean_percentage</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">HighRenew</span>
+
+<span class="n">answer_ten</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-11-(6.6%)">Question 11 (6.6%)<a class="anchor-link" href="#Question-11-(6.6%)"> </a></h3><p>Use the following dictionary to group the Countries by Continent, then create a dateframe that displays the sample size (the number of countries in each continent bin), and the sum, mean, and std deviation for the estimated population of each country.</p>
+<div class="highlight"><pre><span></span><span class="n">ContinentDict</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;China&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;United States&#39;</span><span class="p">:</span><span class="s1">&#39;North America&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Japan&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;United Kingdom&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Russian Federation&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Canada&#39;</span><span class="p">:</span><span class="s1">&#39;North America&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Germany&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;India&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;France&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;South Korea&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Italy&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Spain&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Iran&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;Australia&#39;</span><span class="p">:</span><span class="s1">&#39;Australia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Brazil&#39;</span><span class="p">:</span><span class="s1">&#39;South America&#39;</span><span class="p">}</span>
+</pre></div>
+<p><em>This function should return a DataFrame with index named Continent <code>['Asia', 'Australia', 'Europe', 'North America', 'South America']</code> and columns <code>['size', 'sum', 'mean', 'std']</code></em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_eleven</span><span class="p">():</span>
+    <span class="n">ContinentDict</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;China&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;United States&#39;</span><span class="p">:</span><span class="s1">&#39;North America&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Japan&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;United Kingdom&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Russian Federation&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Canada&#39;</span><span class="p">:</span><span class="s1">&#39;North America&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Germany&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;India&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;France&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;South Korea&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Italy&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Spain&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Iran&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;Australia&#39;</span><span class="p">:</span><span class="s1">&#39;Australia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Brazil&#39;</span><span class="p">:</span><span class="s1">&#39;South America&#39;</span><span class="p">}</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Estimated Population&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">Top15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">]</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">ContinentDict</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Continent&#39;</span><span class="p">})</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">Top15</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Continent&#39;</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;Estimated Population&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">])</span>
+
+   
+   
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="n">answer_eleven</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-12-(6.6%)">Question 12 (6.6%)<a class="anchor-link" href="#Question-12-(6.6%)"> </a></h3><p>Cut % Renewable into 5 bins. Group Top15 by the Continent, as well as these new % Renewable bins. How many countries are in each of these groups?</p>
+<p><em>This function should return a <strong>Series</strong> with a MultiIndex of <code>Continent</code>, then the bins for <code>% Renewable</code>. Do not include groups with no countries.</em></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">answer_twelve</span><span class="p">():</span>
+    <span class="n">ContinentDict</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;China&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;United States&#39;</span><span class="p">:</span><span class="s1">&#39;North America&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Japan&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;United Kingdom&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Russian Federation&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Canada&#39;</span><span class="p">:</span><span class="s1">&#39;North America&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Germany&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;India&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;France&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;South Korea&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Italy&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Spain&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Iran&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;Australia&#39;</span><span class="p">:</span><span class="s1">&#39;Australia&#39;</span><span class="p">,</span> 
+                  <span class="s1">&#39;Brazil&#39;</span><span class="p">:</span><span class="s1">&#39;South America&#39;</span><span class="p">}</span>
+    <span class="n">Top15</span> <span class="o">=</span> <span class="n">answer_one</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_cont</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">ContinentDict</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Continent&#39;</span><span class="p">})</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">Top15</span><span class="p">,</span><span class="n">df_cont</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">series_bin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df_merge</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">df_merge</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">series_bin</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">df_merge</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Continent&#39;</span><span class="p">,</span><span class="n">values</span> <span class="o">=</span> <span class="s1">&#39;% Renewable&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans</span>
+
+<span class="n">answer_twelve</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/MLforIR4/2020/08/09/Advanced-Python-Pandas.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/MLforIR4/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/MLforIR4/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/MLforIR4/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/JSON-KR" title="JSON-KR"><svg class="svg-icon grey"><use xlink:href="/MLforIR4/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/JSon03341159" title="JSon03341159"><svg class="svg-icon grey"><use xlink:href="/MLforIR4/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

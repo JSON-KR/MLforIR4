@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>실제 데이터로 한번 연습해보자! | J.SON - Machine Learning Study Blog</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="실제 데이터로 한번 연습해보자!" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies." />
+<meta property="og:description" content="A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies." />
+<link rel="canonical" href="https://json-kr.github.io/MLforIR4/2020/08/09/Pandas_Practice.html" />
+<meta property="og:url" content="https://json-kr.github.io/MLforIR4/2020/08/09/Pandas_Practice.html" />
+<meta property="og:site_name" content="J.SON - Machine Learning Study Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-09T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2020-08-09T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://json-kr.github.io/MLforIR4/2020/08/09/Pandas_Practice.html"},"description":"A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies.","@type":"BlogPosting","url":"https://json-kr.github.io/MLforIR4/2020/08/09/Pandas_Practice.html","headline":"실제 데이터로 한번 연습해보자!","dateModified":"2020-08-09T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/MLforIR4/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://json-kr.github.io/MLforIR4/feed.xml" title="J.SON - Machine Learning Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/MLforIR4/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>실제 데이터로 한번 연습해보자! | J.SON - Machine Learning Study Blog</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="실제 데이터로 한번 연습해보자!" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies." />
+<meta property="og:description" content="A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies." />
+<link rel="canonical" href="https://json-kr.github.io/MLforIR4/2020/08/09/Pandas_Practice.html" />
+<meta property="og:url" content="https://json-kr.github.io/MLforIR4/2020/08/09/Pandas_Practice.html" />
+<meta property="og:site_name" content="J.SON - Machine Learning Study Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-09T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2020-08-09T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://json-kr.github.io/MLforIR4/2020/08/09/Pandas_Practice.html"},"description":"A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies.","@type":"BlogPosting","url":"https://json-kr.github.io/MLforIR4/2020/08/09/Pandas_Practice.html","headline":"실제 데이터로 한번 연습해보자!","dateModified":"2020-08-09T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://json-kr.github.io/MLforIR4/feed.xml" title="J.SON - Machine Learning Study Blog" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/MLforIR4/">J.SON - Machine Learning Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/MLforIR4/about/">About Me</a><a class="page-link" href="/MLforIR4/search/">Search</a><a class="page-link" href="/MLforIR4/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">실제 데이터로 한번 연습해보자!</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-09T00:00:00-05:00" itemprop="datePublished">
+        Aug 9, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/JSON-KR/MLforIR4/tree/master/_notebooks/Pandas_Practice.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/MLforIR4/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/JSON-KR/MLforIR4/master?filepath=_notebooks%2FPandas_Practice.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/MLforIR4/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/JSON-KR/MLforIR4/blob/master/_notebooks/Pandas_Practice.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/MLforIR4/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/Pandas_Practice.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># GDP 랑 Document의 관계가 있는가?</span>
+<span class="c1"># GDP랑 Citation?</span>
+<span class="c1"># GDP Citations per documents</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">FilePath</span> <span class="o">=</span> <span class="s1">&#39;./Data/&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ScimEn</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">FilePath</span> <span class="o">+</span> <span class="s1">&#39;scimagojr-3.xlsx&#39;</span><span class="p">,</span> 
+                      <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">,</span>
+                      <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
+<span class="n">ScimEn</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rank</th>
+      <th>Documents</th>
+      <th>Citable documents</th>
+      <th>Citations</th>
+      <th>Self-citations</th>
+      <th>Citations per document</th>
+      <th>H index</th>
+    </tr>
+    <tr>
+      <th>Country</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>China</th>
+      <td>1</td>
+      <td>127050</td>
+      <td>126767</td>
+      <td>597237</td>
+      <td>411683</td>
+      <td>4.7</td>
+      <td>138</td>
+    </tr>
+    <tr>
+      <th>United States</th>
+      <td>2</td>
+      <td>96661</td>
+      <td>94747</td>
+      <td>792274</td>
+      <td>265436</td>
+      <td>8.2</td>
+      <td>230</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ScimEn</span> <span class="o">=</span> <span class="p">(</span><span class="n">ScimEn</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ScimEn</span><span class="p">[</span><span class="s1">&#39;Rank&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">TopCountries</span> <span class="o">=</span> <span class="n">ScimEn</span><span class="o">.</span><span class="n">index</span>
+<span class="n">TopCountries</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;China&#39;, &#39;United States&#39;, &#39;Japan&#39;, &#39;United Kingdom&#39;,
+       &#39;Russian Federation&#39;, &#39;Canada&#39;, &#39;Germany&#39;, &#39;India&#39;, &#39;France&#39;,
+       &#39;South Korea&#39;, &#39;Italy&#39;, &#39;Spain&#39;, &#39;Iran&#39;, &#39;Australia&#39;, &#39;Brazil&#39;],
+      dtype=&#39;object&#39;, name=&#39;Country&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span><span class="mi">2016</span><span class="p">)</span>
+          <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+          <span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Country Name&#39;</span><span class="p">)</span>
+
+<span class="n">GDP</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">FilePath</span><span class="o">+</span><span class="s1">&#39;world_bank.csv&#39;</span><span class="p">,</span>
+              <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+              <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">,</span>
+              <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Country Name&#39;</span><span class="p">,</span>
+              <span class="n">usecols</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="n">GDP</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2006</th>
+      <th>2007</th>
+      <th>2008</th>
+      <th>2009</th>
+      <th>2010</th>
+      <th>2011</th>
+      <th>2012</th>
+      <th>2013</th>
+      <th>2014</th>
+      <th>2015</th>
+    </tr>
+    <tr>
+      <th>Country Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Aruba</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.467704e+09</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Andorra</th>
+      <td>4.018196e+09</td>
+      <td>4.021331e+09</td>
+      <td>3.675728e+09</td>
+      <td>3.535389e+09</td>
+      <td>3.346317e+09</td>
+      <td>3.185605e+09</td>
+      <td>3.129538e+09</td>
+      <td>3.127550e+09</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">GDP</span><span class="o">.</span><span class="n">index</span>
+<span class="n">CountriesNotIn</span> <span class="o">=</span> <span class="o">~</span><span class="n">TopCountries</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+<span class="n">TopCountries</span><span class="p">[</span><span class="n">CountriesNotIn</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;South Korea&#39;, &#39;Iran&#39;], dtype=&#39;object&#39;, name=&#39;Country&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">idx</span><span class="p">[</span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;Korea&#39;</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;Korea, Rep.&#39;, &#39;Korea, Dem. People’s Rep.&#39;], dtype=&#39;object&#39;, name=&#39;Country Name&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">idx</span><span class="p">[</span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;Iran&#39;</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;Iran, Islamic Rep.&#39;], dtype=&#39;object&#39;, name=&#39;Country Name&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">GDP</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Korea, Rep.&#39;</span><span class="p">:</span><span class="s1">&#39;South Korea&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;Iran, Islamic Rep.&#39;</span><span class="p">:</span><span class="s1">&#39;Iran&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">GDP</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">TopCountries</span><span class="o">.</span><span class="n">to_list</span><span class="p">()]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2006</th>
+      <th>2007</th>
+      <th>2008</th>
+      <th>2009</th>
+      <th>2010</th>
+      <th>2011</th>
+      <th>2012</th>
+      <th>2013</th>
+      <th>2014</th>
+      <th>2015</th>
+    </tr>
+    <tr>
+      <th>Country Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>China</th>
+      <td>3.992331e+12</td>
+      <td>4.559041e+12</td>
+      <td>4.997775e+12</td>
+      <td>5.459247e+12</td>
+      <td>6.039659e+12</td>
+      <td>6.612490e+12</td>
+      <td>7.124978e+12</td>
+      <td>7.672448e+12</td>
+      <td>8.230121e+12</td>
+      <td>8.797999e+12</td>
+    </tr>
+    <tr>
+      <th>United States</th>
+      <td>1.479230e+13</td>
+      <td>1.505540e+13</td>
+      <td>1.501149e+13</td>
+      <td>1.459484e+13</td>
+      <td>1.496437e+13</td>
+      <td>1.520402e+13</td>
+      <td>1.554216e+13</td>
+      <td>1.577367e+13</td>
+      <td>1.615662e+13</td>
+      <td>1.654857e+13</td>
+    </tr>
+    <tr>
+      <th>Japan</th>
+      <td>5.496542e+12</td>
+      <td>5.617036e+12</td>
+      <td>5.558527e+12</td>
+      <td>5.251308e+12</td>
+      <td>5.498718e+12</td>
+      <td>5.473738e+12</td>
+      <td>5.569102e+12</td>
+      <td>5.644659e+12</td>
+      <td>5.642884e+12</td>
+      <td>5.669563e+12</td>
+    </tr>
+    <tr>
+      <th>United Kingdom</th>
+      <td>2.419631e+12</td>
+      <td>2.482203e+12</td>
+      <td>2.470614e+12</td>
+      <td>2.367048e+12</td>
+      <td>2.403504e+12</td>
+      <td>2.450911e+12</td>
+      <td>2.479809e+12</td>
+      <td>2.533370e+12</td>
+      <td>2.605643e+12</td>
+      <td>2.666333e+12</td>
+    </tr>
+    <tr>
+      <th>Russian Federation</th>
+      <td>1.385793e+12</td>
+      <td>1.504071e+12</td>
+      <td>1.583004e+12</td>
+      <td>1.459199e+12</td>
+      <td>1.524917e+12</td>
+      <td>1.589943e+12</td>
+      <td>1.645876e+12</td>
+      <td>1.666934e+12</td>
+      <td>1.678709e+12</td>
+      <td>1.616149e+12</td>
+    </tr>
+    <tr>
+      <th>Canada</th>
+      <td>1.564469e+12</td>
+      <td>1.596740e+12</td>
+      <td>1.612713e+12</td>
+      <td>1.565145e+12</td>
+      <td>1.613406e+12</td>
+      <td>1.664087e+12</td>
+      <td>1.693133e+12</td>
+      <td>1.730688e+12</td>
+      <td>1.773486e+12</td>
+      <td>1.792609e+12</td>
+    </tr>
+    <tr>
+      <th>Germany</th>
+      <td>3.332891e+12</td>
+      <td>3.441561e+12</td>
+      <td>3.478809e+12</td>
+      <td>3.283340e+12</td>
+      <td>3.417298e+12</td>
+      <td>3.542371e+12</td>
+      <td>3.556724e+12</td>
+      <td>3.567317e+12</td>
+      <td>3.624386e+12</td>
+      <td>3.685556e+12</td>
+    </tr>
+    <tr>
+      <th>India</th>
+      <td>1.265894e+12</td>
+      <td>1.374865e+12</td>
+      <td>1.428361e+12</td>
+      <td>1.549483e+12</td>
+      <td>1.708459e+12</td>
+      <td>1.821872e+12</td>
+      <td>1.924235e+12</td>
+      <td>2.051982e+12</td>
+      <td>2.200617e+12</td>
+      <td>2.367206e+12</td>
+    </tr>
+    <tr>
+      <th>France</th>
+      <td>2.607840e+12</td>
+      <td>2.669424e+12</td>
+      <td>2.674637e+12</td>
+      <td>2.595967e+12</td>
+      <td>2.646995e+12</td>
+      <td>2.702032e+12</td>
+      <td>2.706968e+12</td>
+      <td>2.722567e+12</td>
+      <td>2.729632e+12</td>
+      <td>2.761185e+12</td>
+    </tr>
+    <tr>
+      <th>South Korea</th>
+      <td>9.410199e+11</td>
+      <td>9.924316e+11</td>
+      <td>1.020510e+12</td>
+      <td>1.027730e+12</td>
+      <td>1.094499e+12</td>
+      <td>1.134796e+12</td>
+      <td>1.160809e+12</td>
+      <td>1.194429e+12</td>
+      <td>1.234340e+12</td>
+      <td>1.266580e+12</td>
+    </tr>
+    <tr>
+      <th>Italy</th>
+      <td>2.202170e+12</td>
+      <td>2.234627e+12</td>
+      <td>2.211154e+12</td>
+      <td>2.089938e+12</td>
+      <td>2.125185e+12</td>
+      <td>2.137439e+12</td>
+      <td>2.077184e+12</td>
+      <td>2.040871e+12</td>
+      <td>2.033868e+12</td>
+      <td>2.049316e+12</td>
+    </tr>
+    <tr>
+      <th>Spain</th>
+      <td>1.414823e+12</td>
+      <td>1.468146e+12</td>
+      <td>1.484530e+12</td>
+      <td>1.431475e+12</td>
+      <td>1.431673e+12</td>
+      <td>1.417355e+12</td>
+      <td>1.380216e+12</td>
+      <td>1.357139e+12</td>
+      <td>1.375605e+12</td>
+      <td>1.419821e+12</td>
+    </tr>
+    <tr>
+      <th>Iran</th>
+      <td>3.895523e+11</td>
+      <td>4.250646e+11</td>
+      <td>4.289909e+11</td>
+      <td>4.389208e+11</td>
+      <td>4.677902e+11</td>
+      <td>4.853309e+11</td>
+      <td>4.532569e+11</td>
+      <td>4.445926e+11</td>
+      <td>4.639027e+11</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Australia</th>
+      <td>1.021939e+12</td>
+      <td>1.060340e+12</td>
+      <td>1.099644e+12</td>
+      <td>1.119654e+12</td>
+      <td>1.142251e+12</td>
+      <td>1.169431e+12</td>
+      <td>1.211913e+12</td>
+      <td>1.241484e+12</td>
+      <td>1.272520e+12</td>
+      <td>1.301251e+12</td>
+    </tr>
+    <tr>
+      <th>Brazil</th>
+      <td>1.845080e+12</td>
+      <td>1.957118e+12</td>
+      <td>2.056809e+12</td>
+      <td>2.054215e+12</td>
+      <td>2.208872e+12</td>
+      <td>2.295245e+12</td>
+      <td>2.339209e+12</td>
+      <td>2.409740e+12</td>
+      <td>2.412231e+12</td>
+      <td>2.319423e+12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># GDP, energy, ScimEn 세 데이터 프레임을 공통된 index (나라이름)를 기준으로 합쳐줄거임</span>
+<span class="n">df</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ScimEn</span><span class="p">,</span> <span class="n">GDP</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span>  <span class="c1"># inner 는 교집합을 의미함</span>
+                        <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># 뭐를 기준으로 교집합을 정할지 -&gt; index를 기준으로 하겠다</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rank</th>
+      <th>Documents</th>
+      <th>Citable documents</th>
+      <th>Citations</th>
+      <th>Self-citations</th>
+      <th>Citations per document</th>
+      <th>H index</th>
+      <th>2006</th>
+      <th>2007</th>
+      <th>2008</th>
+      <th>2009</th>
+      <th>2010</th>
+      <th>2011</th>
+      <th>2012</th>
+      <th>2013</th>
+      <th>2014</th>
+      <th>2015</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>China</th>
+      <td>1.0</td>
+      <td>127050.0</td>
+      <td>126767.0</td>
+      <td>597237.0</td>
+      <td>411683.0</td>
+      <td>4.70</td>
+      <td>138.0</td>
+      <td>3.992331e+12</td>
+      <td>4.559041e+12</td>
+      <td>4.997775e+12</td>
+      <td>5.459247e+12</td>
+      <td>6.039659e+12</td>
+      <td>6.612490e+12</td>
+      <td>7.124978e+12</td>
+      <td>7.672448e+12</td>
+      <td>8.230121e+12</td>
+      <td>8.797999e+12</td>
+    </tr>
+    <tr>
+      <th>United States</th>
+      <td>2.0</td>
+      <td>96661.0</td>
+      <td>94747.0</td>
+      <td>792274.0</td>
+      <td>265436.0</td>
+      <td>8.20</td>
+      <td>230.0</td>
+      <td>1.479230e+13</td>
+      <td>1.505540e+13</td>
+      <td>1.501149e+13</td>
+      <td>1.459484e+13</td>
+      <td>1.496437e+13</td>
+      <td>1.520402e+13</td>
+      <td>1.554216e+13</td>
+      <td>1.577367e+13</td>
+      <td>1.615662e+13</td>
+      <td>1.654857e+13</td>
+    </tr>
+    <tr>
+      <th>Japan</th>
+      <td>3.0</td>
+      <td>30504.0</td>
+      <td>30287.0</td>
+      <td>223024.0</td>
+      <td>61554.0</td>
+      <td>7.31</td>
+      <td>134.0</td>
+      <td>5.496542e+12</td>
+      <td>5.617036e+12</td>
+      <td>5.558527e+12</td>
+      <td>5.251308e+12</td>
+      <td>5.498718e+12</td>
+      <td>5.473738e+12</td>
+      <td>5.569102e+12</td>
+      <td>5.644659e+12</td>
+      <td>5.642884e+12</td>
+      <td>5.669563e+12</td>
+    </tr>
+    <tr>
+      <th>United Kingdom</th>
+      <td>4.0</td>
+      <td>20944.0</td>
+      <td>20357.0</td>
+      <td>206091.0</td>
+      <td>37874.0</td>
+      <td>9.84</td>
+      <td>139.0</td>
+      <td>2.419631e+12</td>
+      <td>2.482203e+12</td>
+      <td>2.470614e+12</td>
+      <td>2.367048e+12</td>
+      <td>2.403504e+12</td>
+      <td>2.450911e+12</td>
+      <td>2.479809e+12</td>
+      <td>2.533370e+12</td>
+      <td>2.605643e+12</td>
+      <td>2.666333e+12</td>
+    </tr>
+    <tr>
+      <th>Russian Federation</th>
+      <td>5.0</td>
+      <td>18534.0</td>
+      <td>18301.0</td>
+      <td>34266.0</td>
+      <td>12422.0</td>
+      <td>1.85</td>
+      <td>57.0</td>
+      <td>1.385793e+12</td>
+      <td>1.504071e+12</td>
+      <td>1.583004e+12</td>
+      <td>1.459199e+12</td>
+      <td>1.524917e+12</td>
+      <td>1.589943e+12</td>
+      <td>1.645876e+12</td>
+      <td>1.666934e+12</td>
+      <td>1.678709e+12</td>
+      <td>1.616149e+12</td>
+    </tr>
+    <tr>
+      <th>Canada</th>
+      <td>6.0</td>
+      <td>17899.0</td>
+      <td>17620.0</td>
+      <td>215003.0</td>
+      <td>40930.0</td>
+      <td>12.01</td>
+      <td>149.0</td>
+      <td>1.564469e+12</td>
+      <td>1.596740e+12</td>
+      <td>1.612713e+12</td>
+      <td>1.565145e+12</td>
+      <td>1.613406e+12</td>
+      <td>1.664087e+12</td>
+      <td>1.693133e+12</td>
+      <td>1.730688e+12</td>
+      <td>1.773486e+12</td>
+      <td>1.792609e+12</td>
+    </tr>
+    <tr>
+      <th>Germany</th>
+      <td>7.0</td>
+      <td>17027.0</td>
+      <td>16831.0</td>
+      <td>140566.0</td>
+      <td>27426.0</td>
+      <td>8.26</td>
+      <td>126.0</td>
+      <td>3.332891e+12</td>
+      <td>3.441561e+12</td>
+      <td>3.478809e+12</td>
+      <td>3.283340e+12</td>
+      <td>3.417298e+12</td>
+      <td>3.542371e+12</td>
+      <td>3.556724e+12</td>
+      <td>3.567317e+12</td>
+      <td>3.624386e+12</td>
+      <td>3.685556e+12</td>
+    </tr>
+    <tr>
+      <th>India</th>
+      <td>8.0</td>
+      <td>15005.0</td>
+      <td>14841.0</td>
+      <td>128763.0</td>
+      <td>37209.0</td>
+      <td>8.58</td>
+      <td>115.0</td>
+      <td>1.265894e+12</td>
+      <td>1.374865e+12</td>
+      <td>1.428361e+12</td>
+      <td>1.549483e+12</td>
+      <td>1.708459e+12</td>
+      <td>1.821872e+12</td>
+      <td>1.924235e+12</td>
+      <td>2.051982e+12</td>
+      <td>2.200617e+12</td>
+      <td>2.367206e+12</td>
+    </tr>
+    <tr>
+      <th>France</th>
+      <td>9.0</td>
+      <td>13153.0</td>
+      <td>12973.0</td>
+      <td>130632.0</td>
+      <td>28601.0</td>
+      <td>9.93</td>
+      <td>114.0</td>
+      <td>2.607840e+12</td>
+      <td>2.669424e+12</td>
+      <td>2.674637e+12</td>
+      <td>2.595967e+12</td>
+      <td>2.646995e+12</td>
+      <td>2.702032e+12</td>
+      <td>2.706968e+12</td>
+      <td>2.722567e+12</td>
+      <td>2.729632e+12</td>
+      <td>2.761185e+12</td>
+    </tr>
+    <tr>
+      <th>South Korea</th>
+      <td>10.0</td>
+      <td>11983.0</td>
+      <td>11923.0</td>
+      <td>114675.0</td>
+      <td>22595.0</td>
+      <td>9.57</td>
+      <td>104.0</td>
+      <td>9.410199e+11</td>
+      <td>9.924316e+11</td>
+      <td>1.020510e+12</td>
+      <td>1.027730e+12</td>
+      <td>1.094499e+12</td>
+      <td>1.134796e+12</td>
+      <td>1.160809e+12</td>
+      <td>1.194429e+12</td>
+      <td>1.234340e+12</td>
+      <td>1.266580e+12</td>
+    </tr>
+    <tr>
+      <th>Italy</th>
+      <td>11.0</td>
+      <td>10964.0</td>
+      <td>10794.0</td>
+      <td>111850.0</td>
+      <td>26661.0</td>
+      <td>10.20</td>
+      <td>106.0</td>
+      <td>2.202170e+12</td>
+      <td>2.234627e+12</td>
+      <td>2.211154e+12</td>
+      <td>2.089938e+12</td>
+      <td>2.125185e+12</td>
+      <td>2.137439e+12</td>
+      <td>2.077184e+12</td>
+      <td>2.040871e+12</td>
+      <td>2.033868e+12</td>
+      <td>2.049316e+12</td>
+    </tr>
+    <tr>
+      <th>Spain</th>
+      <td>12.0</td>
+      <td>9428.0</td>
+      <td>9330.0</td>
+      <td>123336.0</td>
+      <td>23964.0</td>
+      <td>13.08</td>
+      <td>115.0</td>
+      <td>1.414823e+12</td>
+      <td>1.468146e+12</td>
+      <td>1.484530e+12</td>
+      <td>1.431475e+12</td>
+      <td>1.431673e+12</td>
+      <td>1.417355e+12</td>
+      <td>1.380216e+12</td>
+      <td>1.357139e+12</td>
+      <td>1.375605e+12</td>
+      <td>1.419821e+12</td>
+    </tr>
+    <tr>
+      <th>Iran</th>
+      <td>13.0</td>
+      <td>8896.0</td>
+      <td>8819.0</td>
+      <td>57470.0</td>
+      <td>19125.0</td>
+      <td>6.46</td>
+      <td>72.0</td>
+      <td>3.895523e+11</td>
+      <td>4.250646e+11</td>
+      <td>4.289909e+11</td>
+      <td>4.389208e+11</td>
+      <td>4.677902e+11</td>
+      <td>4.853309e+11</td>
+      <td>4.532569e+11</td>
+      <td>4.445926e+11</td>
+      <td>4.639027e+11</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Australia</th>
+      <td>14.0</td>
+      <td>8831.0</td>
+      <td>8725.0</td>
+      <td>90765.0</td>
+      <td>15606.0</td>
+      <td>10.28</td>
+      <td>107.0</td>
+      <td>1.021939e+12</td>
+      <td>1.060340e+12</td>
+      <td>1.099644e+12</td>
+      <td>1.119654e+12</td>
+      <td>1.142251e+12</td>
+      <td>1.169431e+12</td>
+      <td>1.211913e+12</td>
+      <td>1.241484e+12</td>
+      <td>1.272520e+12</td>
+      <td>1.301251e+12</td>
+    </tr>
+    <tr>
+      <th>Brazil</th>
+      <td>15.0</td>
+      <td>8668.0</td>
+      <td>8596.0</td>
+      <td>60702.0</td>
+      <td>14396.0</td>
+      <td>7.00</td>
+      <td>86.0</td>
+      <td>1.845080e+12</td>
+      <td>1.957118e+12</td>
+      <td>2.056809e+12</td>
+      <td>2.054215e+12</td>
+      <td>2.208872e+12</td>
+      <td>2.295245e+12</td>
+      <td>2.339209e+12</td>
+      <td>2.409740e+12</td>
+      <td>2.412231e+12</td>
+      <td>2.319423e+12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;2015&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;Citations&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1be8e434988&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZcAAAEGCAYAAACpXNjrAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4xLjMsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+AADFEAAAgAElEQVR4nO3df5RU5Z3n8fen5adBQwtoDI3BWckPkkWiNcqEmSTGBMGdBWfUrG4ciMsZdpz8TmaFzO5Zd3X2nEiyMXFOQsJoIuQkUUY0MFmVcDBOsjNiaCK2QePSMQm0EGkBFaK2YH/3j/u0Fm11VdHcquofn9c5darqe597n28Dzbfu8zz3liICMzOzPDU1OgEzMxt6XFzMzCx3Li5mZpY7FxczM8udi4uZmeVuRKMTGCgmTpwYU6dObXQaZmaDytatW5+JiEm94y4uydSpU2ltbW10GmZmg4qk35aKe1jMzMxy5+JiZma5c3ExM7Pc1bS4SPqMpO2SfiHp+5LGSDpT0kOSdki6Q9Ko1HZ0et+etk8tOs7nU/wJSRcVxeemWLukZUXxkn2YmVl91Ky4SJoMfBIoRMS7gBOAK4AbgZsiYhpwAFicdlkMHIiIs4CbUjskTU/7vROYC3xd0gmSTgC+BswDpgNXpraU6cPMzOqg1sNiI4CxkkYAJwJ7gA8Ad6btq4BL0usF6T1p+4WSlOK3R0RXRPwaaAfOS4/2iHgyIl4GbgcWpH366sPMzJJ9h7p4ZNez7DvUlfuxa7YUOSKekvQlYCfwIvAjYCvwbEQcSc06gMnp9WRgV9r3iKTngAkpvrno0MX77OoVPz/t01cfR5G0BFgCcMYZZ/TvBzUzG4TWbXuKpWvbGNnUxOHubpZfOoP5M0v+V9kvtRwWayY76zgTeDPwBrIhrN567vmvPrblFX99MGJlRBQiojBp0uuuATIzG5L2Hepi6do2XjrczcGuI7x0uJtr17blegZTy2GxDwK/jojOiDgM3AW8BxifhskAWoDd6XUHMAUgbX8jsL843mufvuLPlOnDzGzY6zjwIiObjv7vf2RTEx0HXsytj1oWl53ALEknpnmQC4HHgB8Dl6U2i4B16fX69J60/f7IvslsPXBFWk12JjAN+BmwBZiWVoaNIpv0X5/26asPM7Nhr6V5LIe7u4+KHe7upqV5bG591Ky4RMRDZJPqPwceTX2tBJYCn5XUTjY/cmva5VZgQop/FliWjrMdWENWmO4DPhYRr6Q5lY8DG4DHgTWpLWX6MDMb9iaMG83yS2cwZmQTJ40ewZiRTSy/dAYTxo3OrQ/5a44zhUIhfG8xMxtO9h3qouPAi7Q0j+13YZG0NSIKveO+caWZ2TA1YdzoXM9Wivn2L2ZmljsXFzMzy52Li5mZ5c7FxczMcufiYmZmuXNxMTOz3Lm4mJlZ7lxczMwsdy4uZmaWOxcXMzPLnYuLmZnlzsXFzMxy5+JiZma5c3ExM7PcubiYmVnuXFzMzCx3NSsukt4maVvR43lJn5Z0iqSNknak5+bUXpJultQuqU3SOUXHWpTa75C0qCh+rqRH0z43S1KKl+zDzMzqo2bFJSKeiIiZETETOBd4AbgbWAZsiohpwKb0HmAeMC09lgArICsUwHXA+cB5wHVFxWJFatuz39wU76sPMzOrg3oNi10I/CoifgssAFal+CrgkvR6AbA6MpuB8ZJOBy4CNkbE/og4AGwE5qZtJ0fEgxERwOpexyrVh5mZ1UG9issVwPfT69MiYg9Aej41xScDu4r26UixcvGOEvFyfRxF0hJJrZJaOzs7+/mjmZlZbzUvLpJGAfOBf6zUtEQs+hGvWkSsjIhCRBQmTZp0LLuamVkZ9ThzmQf8PCKeTu+fTkNapOe9Kd4BTCnarwXYXSHeUiJerg8zM6uDehSXK3ltSAxgPdCz4msRsK4ovjCtGpsFPJeGtDYAcyQ1p4n8OcCGtO2gpFlpldjCXscq1YeZmdXBiFoeXNKJwIeA/1wU/gKwRtJiYCdweYrfA1wMtJOtLLsaICL2S7oB2JLaXR8R+9Pra4DbgLHAvelRrg8zM6sDZQutrFAoRGtra6PTMDMbVCRtjYhC77iv0Dczs9y5uJiZWe5cXMzMLHcuLmZmljsXFzMzy52Li5mZ5c7FxczMcufiYmZmuXNxMTOz3Lm4mJlZ7lxczMwsdy4uZmaWOxcXMzPLnYuLmZnlzsXFzMxy5+JiZma5c3ExM7Pc1bS4SBov6U5Jv5T0uKQ/knSKpI2SdqTn5tRWkm6W1C6pTdI5RcdZlNrvkLSoKH6upEfTPjdLUoqX7MPMzOqj1mcuXwXui4i3A2cDjwPLgE0RMQ3YlN4DzAOmpccSYAVkhQK4DjgfOA+4rqhYrEhte/abm+J99WE2KOw71MUju55l36GuRqdi1i8janVgSScD7wU+ChARLwMvS1oAvD81WwU8ACwFFgCrIyKAzems5/TUdmNE7E/H3QjMlfQAcHJEPJjiq4FLgHvTsUr1YTbgrdv2FEvXtjGyqYnD3d0sv3QG82dObnRaZseklmcufwB0At+W9LCkWyS9ATgtIvYApOdTU/vJwK6i/TtSrFy8o0ScMn0cRdISSa2SWjs7O/v/k5rlZN+hLpaubeOlw90c7DrCS4e7uXZtm89gbNCpZXEZAZwDrIiIdwO/p/zwlErEoh/xqkXEyogoRERh0qRJx7KrWU10HHiRkU1H/1qObGqi48CLDcrIrH9qWVw6gI6IeCi9v5Os2DydhrtIz3uL2k8p2r8F2F0h3lIiTpk+zAa0luaxHO7uPip2uLubluaxDcrIrH9qVlwi4nfALklvS6ELgceA9UDPiq9FwLr0ej2wMK0amwU8l4a0NgBzJDWnifw5wIa07aCkWWmV2MJexyrVh9mANmHcaJZfOoMxI5s4afQIxoxsYvmlM5gwbnSjUzM7JjWb0E8+AXxX0ijgSeBqsoK2RtJiYCdweWp7D3Ax0A68kNoSEfsl3QBsSe2u75ncB64BbgPGkk3k35viX+ijD7MBb/7Mycw+ayIdB16kpXmsC4sNSsoWZ1mhUIjW1tZGp2FmNqhI2hoRhd5xX6FvZma5c3ExM7PcubiYmVnuXFzMzCx3Li5mZpY7FxczM8udi4uZmeXOxcXMzHLn4mJmZrlzcTEzs9y5uJiZWe5cXMzMLHcuLmZmljsXFzMzy52Li5mZ5c7FxczMcufiYmZmuatpcZH0G0mPStomqTXFTpG0UdKO9Nyc4pJ0s6R2SW2Szik6zqLUfoekRUXxc9Px29O+KteHmZnVRz3OXC6IiJlFX4O5DNgUEdOATek9wDxgWnosAVZAViiA64DzgfOA64qKxYrUtme/uRX6MDOzOmjEsNgCYFV6vQq4pCi+OjKbgfGSTgcuAjZGxP6IOABsBOambSdHxIMREcDqXscq1YeZmdVBrYtLAD+StFXSkhQ7LSL2AKTnU1N8MrCraN+OFCsX7ygRL9fHUSQtkdQqqbWzs7OfP6KZmfU2osbHnx0RuyWdCmyU9MsybVUiFv2IVy0iVgIrAQqFwjHta2ZmfavpmUtE7E7Pe4G7yeZMnk5DWqTnval5BzClaPcWYHeFeEuJOGX6MDOzOqhZcZH0Bkkn9bwG5gC/ANYDPSu+FgHr0uv1wMK0amwW8Fwa0toAzJHUnCby5wAb0raDkmalVWILex2rVB9mZlYHVQ2LSZoNbIuI30u6CjgH+GpE/LbMbqcBd6fVwSOA70XEfZK2AGskLQZ2Apen9vcAFwPtwAvA1QARsV/SDcCW1O76iNifXl8D3AaMBe5ND4Av9NGHmZnVgbKFVhUaSW3A2cAM4DvArcCfR8T7apte/RQKhWhtbW10GmZmg4qkrUWXmryq2mGxI2m57wKyM5avAiflmaCZmQ0d1a4WOyjp88BVwHslnQCMrF1aZmY2mFV75vIfgC5gcUT8jux6ki/WLCszMxvUqjpzSQXly0Xvd5JdEW9mZvY6VZ25SPrzdBPI5yQ9L+mgpOdrnZyZmQ1O1c65LAf+fUQ8XstkzMxsaKh2zuVpFxYzM6tWtWcurZLuAH5ANrEPQETcVZOszMxsUKu2uJxMdtX8nKJYAC4uZmb2OtWuFru61omYmdnQUe1qsRZJd0vaK+lpSWsltVTe08zMhqNqJ/S/TXan4TeTXUD5TylmZmb2OtUWl0kR8e2IOJIetwGTapiXmZkNYtUWl2ckXSXphPS4CthXy8TMzGzwqra4/Cfgw8DvgD3AZSlmZmb2OtWuFtsJzK9xLmZmNkSULS6Sro2I5ZL+nuy6lqNExCdrlpmZmQ1alYbFem750gpsLfGoKM3RPCzph+n9mZIeSjfCvEPSqBQfnd63p+1Ti47x+RR/QtJFRfG5KdYuaVlRvGQfZmZWH2WLS0T8U3r5QkSsKn6QXbFfjU/xWpECuBG4KSKmAQeAxSm+GDgQEWcBN6V2SJoOXAG8E5gLfL1nYQHwNWAeMB24MrUt14eZmdVBtRP6n68ydpR0oeW/A25J7wV8ALgzNVkFXJJeL0jvSdsvTO0XALdHRFdE/BpoB85Lj/aIeDIiXgZuBxZU6MPMzOqg0pzLPOBiYLKkm4s2nQwcqeL4XwGuBU5K7ycAz0ZEz74dZBdlkp53AUTEEUnPpfaTgc1FxyzeZ1ev+PkV+jAzszqodOaym2y+5SWOnmtZD1xUZj8k/SmwNyKK52ZUomlU2JZXvFSOSyS1Smrt7Ows1cTMzPqh7JlLRDwCPCLpexFx+BiPPRuYL+liYAzZ2c5XgPGSRqQzixayAgbZGcYUoEPSCOCNwP6ieI/ifUrFnynTR++fbyWwEqBQKJQsQGZmduyqnXOZKulOSY9JerLnUW6HiPh8RLRExFSyCfn7I+IjwI/JLsIEWASsS6/Xp/ek7fdHRKT4FWk12ZnANOBnwBZgWloZNir1sT7t01cfZmZWB8dy48oVZPMsFwCrge/0s8+lwGcltZPNj9ya4rcCE1L8s8AygIjYDqwBHgPuAz4WEa+ks5KPAxvIVqOtSW3L9WFmZnWg7IN+hUbS1og4V9KjEfFvU+ynEfEnNc+wTgqFQrS2tjY6DTOzQSXVh0LveLXfRPmSpCZgh6SPA08Bp+aZoJmZDR3VDot9GjgR+CRwLnAVsLBWSZmZ2eBW9YR+RByKiI6IuDoiLgXOqGViZmY2eNX0Cn0zMxuean2FvpmZDUOVJvR7rtCfz9F3QT4IfKZWSZmZ2eBW7RX63y26V5eZmVlZlYbF1kTEh4GHJZX6srAZNcvMzMwGrUrDYn8vaTbwp73ib6GP+3WZmZlVWi22FDgYEb8tfpB9UdhNtU/PzMwGo0rFZWpEtPUORkQrMLUmGZmZ2aBXqbiMKbNtbJ6JmJnZ0FGpuGyR9Je9g5IWc/TSZDMzs1dVmtD/NHC3pI/wWjEpAKOAP6tlYmZmNnhVus7laeA9ki4A3pXC/yci7q95ZmZmNmhVdcv9iPgx2bc7mpmZVVTtjSvNzMyqVrPiImmMpJ9JekTSdkn/M8XPlPSQpB2S7pA0KsVHp/ftafvUomN9PsWfkHRRUXxuirVLWlYUL9mHmZnVRy3PXLqAD0TE2cBMYK6kWcCNwE0RMQ04ACxO7RcDByLiLLILNG8EkDQduAJ4JzAX+LqkEySdAHwNmAdMB65MbSnTh5mZ1UHNiktkDqW3I9MjgA8Ad6b4KuCS9HpBek/afqEkpfjtEdEVEb8G2oHz0qM9Ip6MiJeB24EFaZ+++jAzszqo6ZxLOsPYBuwFNgK/Ap4tusNyBzA5vZ4M7AJI258DJhTHe+3TV3xCmT7MzKwOalpcIuKViJgJtJCdabyjVLP0rD625RV/HUlLJLVKau3s7CzVxMzM+qEuq8Ui4lngAWAWMF5SzxLoFl67u3IHMAUgbX8jsL843mufvuLPlOmjd14rI6IQEYVJkyYdz49oZmZFarlabJKk8en1WOCDwONk18tclpotAtal1+vTe9L2+yMiUvyKtJrsTGAa8DNgCzAtrQwbRTbpvz7t01cfZmZWB1VdRNlPpwOr0qquJmBNRPxQ0mPA7ZL+DngYuDW1vxX4jqR2sjOWKwAiYrukNcBjwBHgYxHxCoCkjwMbgBOAb0XE9nSspX30YWZmdaDsg74VCoVobW1tdBpmZoOKpK0RUegd9xX6ZmaWOxcXMzPLnYuLmZnlzsXFzMxy5+JiZma5c3ExM7PcubiYmVnuXFzMzCx3Li5mZpY7FxczM8udi4uZmeXOxcXMzHLn4mID2r5DXTyy61n2HepqdCpmdgxqect9s+OybttTLF3bxsimJg53d7P80hnMn+lvrDYbDHzmUkf+FF69fYe6WLq2jZcOd3Ow6wgvHe7m2rVt/rMzGyR85lIn/hR+bDoOvMjIpiZeovvV2MimJjoOvMiEcaMbmJmZVcNnLnWQ56fw4XL209I8lsPd3UfFDnd309I8tkEZmdmxcHGpg55P4cV6PoUfi3XbnmL2jfdz1S0PMfvG+1m/7ak80xxQJowbzfJLZzBmZBMnjR7BmJFNLL90hs9azAaJmg2LSZoCrAbeBHQDKyPiq5JOAe4ApgK/AT4cEQckCfgqcDHwAvDRiPh5OtYi4L+lQ/9dRKxK8XOB24CxwD3ApyIi+uqjVj9rJXl8Ci8+++kZKrp2bRuzz5o4ZP/DnT9zMrPPmkjHgRdpaR47ZH9Os6GolmcuR4DPRcQ7gFnAxyRNB5YBmyJiGrApvQeYB0xLjyXACoBUKK4DzgfOA66T1Jz2WZHa9uw3N8X76qMh8vgUntfZz2AzYdxozp4y3oXFbJCp2ZlLROwB9qTXByU9DkwGFgDvT81WAQ8AS1N8dUQEsFnSeEmnp7YbI2I/gKSNwFxJDwAnR8SDKb4auAS4t0wfDXO8n8I9B2Fmg0ld5lwkTQXeDTwEnJYKT08BOjU1mwzsKtqtI8XKxTtKxCnTR++8lkhqldTa2dnZ3x+vasfzKdxzEGY2mNR8KbKkccBa4NMR8Xw2tVK6aYlY9CNetYhYCawEKBQKx7RvI3gOwswGi5qeuUgaSVZYvhsRd6Xw02m4i/S8N8U7gClFu7cAuyvEW0rEy/Ux6HkOwswGg5oVl7T661bg8Yj4ctGm9cCi9HoRsK4ovlCZWcBzaUhrAzBHUnOayJ8DbEjbDkqalfpa2OtYpfowM7M6qOWw2GzgL4BHJW1Lsb8FvgCskbQY2AlcnrbdQ7YMuZ1sKfLVABGxX9INwJbU7vqeyX3gGl5binxvelCmDzMzqwNli7OsUChEa2tro9MwMxtUJG2NiELvuK/QNzOz3Lm4mJlZ7lxczMwsdy4uZmaWOxcXMzPLnYuLmZnlzsVlmBsuXz5mZvXlrzkexvzVy2ZWKz5zGaby/OplM7PeXFwGqErDVcc7nDVcv3zMzOrDw2IDUKXhqjyGs/zlY2ZWSz5zyVEek+OVhqvyGs7yl4+ZWS35zCUneU2O9wxXvcRrZxU9w1UTxo2uuP1Y+MvHzKxWXFyO075DXWzf/TzX3tlG15HuV//Tv3ZtG7PPmnjM/2FXGq7KezhrwrjRLipmljsPix2HddueYvaN9/NX39lK15Gj/8OvdnK891BapeEqD2eZ2WDgM5d+Kp77KKWas4m+htIqDVd5OMvMBjoXl34qNfcBcOKoE+iOqHg2UVycSg2lVRqu8nCWmQ1kNRsWk/QtSXsl/aIodoqkjZJ2pOfmFJekmyW1S2qTdE7RPotS+x2SFhXFz5X0aNrnZkkq10feSs19jB4hvnHVOfzL0g9UnMz3dSZmNpTVcs7lNmBur9gyYFNETAM2pfcA84Bp6bEEWAFZoQCuA84HzgOuKyoWK1Lbnv3mVugjV6XmPr542dm8962nVnVG4etMzGwoq9mwWET8RNLUXuEFwPvT61XAA8DSFF8dEQFsljRe0ump7caI2A8gaSMwV9IDwMkR8WCKrwYuAe4t00fueuY+tu9+Hgje+eY3Vr1vT3G6tteci4e6zGwoqPecy2kRsQcgIvZIOjXFJwO7itp1pFi5eEeJeLk+XkfSErKzH84444x+/UD/t/2Zfl/f4ol5MxuqBspSZJWIRT/ixyQiVkZEISIKkyZNOtbdc7lafsK40Zw9ZbwLi5kNKfUuLk+n4S7S894U7wCmFLVrAXZXiLeUiJfrI3eelDczK63exWU90LPiaxGwrii+MK0amwU8l4a2NgBzJDWnifw5wIa07aCkWWmV2MJexyrVR+48KW9mVlotlyJ/H3gQeJukDkmLgS8AH5K0A/hQeg9wD/Ak0A78A/DXAGki/wZgS3pc3zO5D1wD3JL2+RXZZD5l+sidr5Y3MytN2QItKxQK0dra2q999x3q8qS8mQ1LkrZGRKF33Ffo58BXy5uZHW2grBazInl8L4yZWSP5zGWAyet7YczMGslnLgNIXt8yaWbWaC4uA4ivmzGzocLFZQDxdTNmNlS4uAwgvm7GzIYKT+gPML6ZpZkNBS4uNdTfiyt93YyZDXYuLjXiJcVmNpx5zqUGvKTYzIY7F5ca8JJiMxvuXFxqwEuKzWy4c3GpAS8pNrPhzhP6NeIlxWY2nLm41JCXFJvZcOVhMTMzy92QLS6S5kp6QlK7pGWNzsfMbDgZksVF0gnA14B5wHTgSknTG5uVmdnwMSSLC3Ae0B4RT0bEy8DtwIIG52RmNmwM1eIyGdhV9L4jxY4iaYmkVkmtnZ2ddUvOzGyoG6qrxVQiFq8LRKwEVgJI6pT021onVsJE4JkG9FuNgZwbOL/j5fyOz0DOr565vaVUcKgWlw5gStH7FmB3uR0iYlJNM+qDpNaIKDSi70oGcm7g/I6X8zs+Azm/gZDbUB0W2wJMk3SmpFHAFcD6BudkZjZsDMkzl4g4IunjwAbgBOBbEbG9wWmZmQ0bQ7K4AETEPcA9jc6jCisbnUAZAzk3cH7Hy/kdn4GcX8NzU8Tr5rnNzMyOy1CdczEzswZycTEzs9y5uNRBpfucSfqspMcktUnaJKnkuvFG5VfU7jJJIamuSxyryU/Sh9Of4XZJ3xtI+Uk6Q9KPJT2c/o4vrmNu35K0V9Iv+tguSTen3NsknVOv3KrM7yMprzZJ/yrp7IGUX1G7P5T0iqTL6pVb6rdifpLeL2lb+t3457olFxF+1PBBtlrtV8AfAKOAR4DpvdpcAJyYXl8D3DGQ8kvtTgJ+AmwGCgMpP2Aa8DDQnN6fOsDyWwlck15PB35Tx/zeC5wD/KKP7RcD95JdeDwLeKheuVWZ33uK/l7nDbT8iv4N3E+2gOiygZQfMB54DDgjva/b74bPXGqv4n3OIuLHEfFCeruZ7KLPAZNfcgOwHHipjrlBdfn9JfC1iDgAEBF7B1h+AZycXr+RChf05ikifgLsL9NkAbA6MpuB8ZJOr092lfOLiH/t+Xul/r8b1fz5AXwCWAvU898dUFV+/xG4KyJ2pvZ1y9HFpfaqus9ZkcVknyTrpWJ+kt4NTImIH9Yxrx7V/Pm9FXirpH+RtFnS3LplV11+/wO4SlIH2afbT9Qntaoc67/PRqr370ZFkiYDfwZ8o9G59OGtQLOkByRtlbSwXh0P2etcBpCq7nMGIOkqoAC8r6YZ9eq2ROzV/CQ1ATcBH61XQr1U8+c3gmxo7P1kn2x/KuldEfFsjXOD6vK7ErgtIv63pD8CvpPy6659ehVV/e+zkSRdQFZc/rjRufTyFWBpRLwilfqjbLgRwLnAhcBY4EFJmyPi/9WjY6utqu5zJumDwH8F3hcRXXXKDSrndxLwLuCB9MvzJmC9pPkR0ToA8utpszkiDgO/lvQEWbHZMkDyWwzMBYiIByWNIbuxYN2HUUo45vvw1ZukGcAtwLyI2NfofHopALen342JwMWSjkTEDxqb1qs6gGci4vfA7yX9BDgbqHlx8bBY7VW8z1kadvomML/O8wUV84uI5yJiYkRMjYipZOPe9SosFfNLfkC2KAJJE8mGAp4cQPntJPvkiKR3AGOAgfIdD+uBhWnV2CzguYjY0+ikekg6A7gL+It6fNo+VhFxZtHvxp3AXw+gwgKwDvgTSSMknQicDzxej4595lJj0cd9ziRdD7RGxHrgi8A44B/TJ6CdETF/AOXXMFXmtwGYI+kx4BXgv9TrE26V+X0O+AdJnyEbcvpopKU7tSbp+2TDhRPTnM91wMiU+zfI5oAuBtqBF4Cr65HXMeT334EJwNfT78aRqOPdfqvIr6Eq5RcRj0u6D2gDuoFbIqLssurccqvTv3EzMxtGPCxmZma5c3ExM7PcubiYmVnuXFzMzCx3Li5mZkNYtTffTG3fK+nnko4U34RT0lvSFf49N8D8q0rHcnExqzNJU9Jdkh9Pv6ifSvFTJG2UtCM9N6f42yU9KKlL0t/0OtZvJD2afunrde2RDS63kS7ircJOsrtx9L6z+B7gPRExk+xamWWS3lzuQC4uZvV3BPhcRLyD7E7EH5M0HVgGbIqIacCm9B6yGxN+EvhSH8e7ICJm1vP6Dxs8St3cUtK/kXRfOhv5qaS3p7a/iYiea2KKj/Fy0Z1DRlNF7XBxMauziNgTET9Prw+SXTE9mewOxatSs1XAJanN3ojYAhxuQLo2NK0EPhER5wJ/A3y90g7pjLuN7EanN0ZE2dsE+Qp9swaSNBV4N/AQcFrPrVciYo+kU6s4RAA/khTANyNiZa1ytaFB0jiy78npuSMIZGcjZUXELmBGGg77gaQ7I+Lpvtq7uJg1SPolXwt8OiKe7+dddWdHxO5UiDZK+mUaBjHrSxPwbJo/OWbp39t24E/I7qfWZydmVmeSRpIVlu9GxF0p/HTPF3Wl54o3Me0Zmkg3PL2b7MvLzPoUEc+T3T38cnj1q67Lfn20pBZJY9PrZmA28ES5fVxczOpM2SnKrcDjEfHlok3rgUXp9SKyO9qWO84bJJ3U8xqYA9TlpoQ2eKSbWz4IvE1Sh6TFwEeAxZIeAbaTvj1V0h+mG2BeDnwznaEAvAN4KLX/Z+BLEfFo2X5940qz+pL0x8BPgUd5bVXO35LNu6wBziBbEnp5ROyX9CagleyrkruBQ8B0su8PuTvtPwL4XkT8r3r9HGbluLiYmVnuPCxmZma5c3ExM/OLyIkAAAAmSURBVLPcubiYmVnuXFzMzCx3Li5mZpY7FxczM8udi4uZmeXu/wPfsQBITR44JAAAAABJRU5ErkJggg==
+" />
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#47928;&#51228;-2">&#47928;&#51228; 2<a class="anchor-link" href="#&#47928;&#51228;-2"> </a></h3><p>지난 10년간 각 나라의 GDP 평균은 얼마냐? (missing value들은 계산에서 제외)</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Quiz! 왜 copy를 하는걸까?</span>
+<span class="n">TOP15</span> <span class="o">=</span> <span class="n">ans1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span><span class="mi">2016</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">avgGDP</span> <span class="o">=</span> <span class="n">TOP15</span><span class="p">[</span><span class="n">years</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">avgGDP</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#47928;&#51228;-3">&#47928;&#51228; 3<a class="anchor-link" href="#&#47928;&#51228;-3"> </a></h3><p>10년간의 GDP평균이 6번째로 큰 나라는 어디?
+그나라는 10년사이에 GDP가 얼마나 변했나?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sixth_country</span> <span class="o">=</span> <span class="n">avgGDP</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;여섯번째로 10년간 평균 GDP가 큰 나라는&#39;</span><span class="p">,</span> <span class="n">sixth_country</span><span class="p">)</span>
+
+<span class="n">GDP_CHANGE</span> <span class="o">=</span> <span class="n">TOP15</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sixth_country</span><span class="p">][</span><span class="n">years</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">TOP15</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sixth_country</span><span class="p">][</span><span class="n">years</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">GDP_CHANGE</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#47928;&#51228;-4">&#47928;&#51228; 4<a class="anchor-link" href="#&#47928;&#51228;-4"> </a></h3><p><code>Energy Supply per Capita</code> 의 평균은?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ESmean</span> <span class="o">=</span> <span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">ESmean</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#47928;&#51228;-5">&#47928;&#51228; 5<a class="anchor-link" href="#&#47928;&#51228;-5"> </a></h3><p>어느 나라가 가장 큰 % Renewable을 가지고 있냐?
+그 나라의 % Renewable은 얼마냐?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">country</span> <span class="o">=</span> <span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="n">percentage</span> <span class="o">=</span> <span class="n">TOP15</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Brazil&#39;</span><span class="p">][</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span>
+<span class="p">(</span><span class="n">country</span><span class="p">,</span> <span class="n">percentage</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#47928;&#51228;-6">&#47928;&#51228; 6<a class="anchor-link" href="#&#47928;&#51228;-6"> </a></h3><p>사람당 Citable Documents를 추정하는 Column을 만들어라.
+사람당 Citable Documents와 사람당 Energy supply사이의 피어슨 상관계수는?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_column</span> <span class="o">=</span> <span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;Citable documents&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">]</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">new_column</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">])</span>
+
+<span class="n">corr</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#47928;&#51228;-7">&#47928;&#51228; 7<a class="anchor-link" href="#&#47928;&#51228;-7"> </a></h3><p>Top15의 국가중에 % Renewable 값이 평균 이상인 나라는 1, 아닌 나라는 0의 값을 주는 새로운 컬럼을 만들어라</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mean_percentage</span> <span class="o">=</span><span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">HighRenew</span><span class="o">=</span> <span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span>
+<span class="n">TOP15</span><span class="p">[</span><span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">mean_percentage</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">TOP15</span><span class="p">[</span><span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;% Renewable&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">mean_percentage</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">HighRenew</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#47928;&#51228;-8">&#47928;&#51228; 8<a class="anchor-link" href="#&#47928;&#51228;-8"> </a></h3><p>다음 Dictionary를 이용해 나라들을 대륙별로 묶어라.
+예측 인구수의 Column을 새로 만들고 (Estimated Population = Energy Supply/Energy Supply per capita),
+대륙별 나라의 수, 추정인구의 합계, 평균, 표준편차를 구하라</p>
+<p>ContinentDict  = {'China':'Asia', 
+                  'United States':'North America', 
+                  'Japan':'Asia', 
+                  'United Kingdom':'Europe', 
+                  'Russian Federation':'Europe', 
+                  'Canada':'North America', 
+                  'Germany':'Europe', 
+                  'India':'Asia',
+                  'France':'Europe', 
+                  'South Korea':'Asia', 
+                  'Italy':'Europe', 
+                  'Spain':'Europe', 
+                  'Iran':'Asia',
+                  'Australia':'Australia', 
+                  'Brazil':'South America'}</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">TOP15</span> <span class="o">=</span> <span class="n">ans1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">ContinentDict</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;China&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;United States&#39;</span><span class="p">:</span><span class="s1">&#39;North America&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Japan&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;United Kingdom&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Russian Federation&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Canada&#39;</span><span class="p">:</span><span class="s1">&#39;North America&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Germany&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;India&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;France&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;South Korea&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Italy&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Spain&#39;</span><span class="p">:</span><span class="s1">&#39;Europe&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Iran&#39;</span><span class="p">:</span><span class="s1">&#39;Asia&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;Australia&#39;</span><span class="p">:</span><span class="s1">&#39;Australia&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Brazil&#39;</span><span class="p">:</span><span class="s1">&#39;South America&#39;</span><span class="p">}</span>
+
+<span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;Estimated Population&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;Energy Supply&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">TOP15</span><span class="p">[</span><span class="s1">&#39;Energy Supply per Capita&#39;</span><span class="p">]</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">ContinentDict</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Continent&#39;</span><span class="p">})</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">TOP15</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Continent&#39;</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;Estimated Population&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">])</span>
+
+
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/MLforIR4/2020/08/09/Pandas_Practice.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/MLforIR4/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/MLforIR4/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/MLforIR4/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A journey towards revolutionizing the manufacturing industry by implementing the state of the art machine learning technologies.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/JSON-KR" title="JSON-KR"><svg class="svg-icon grey"><use xlink:href="/MLforIR4/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/JSon03341159" title="JSon03341159"><svg class="svg-icon grey"><use xlink:href="/MLforIR4/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
